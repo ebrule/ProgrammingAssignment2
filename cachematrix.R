@@ -9,7 +9,7 @@
 ##    m$set(matrix(c(0,2,2,0),2,2))
 ##    m$get()
 ##    m$setCacheMatrix(a)
-##    M$getCacheMatrix()
+##    m$getCacheMatrix()
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
