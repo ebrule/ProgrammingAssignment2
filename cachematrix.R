@@ -12,15 +12,15 @@
 ##    m$getCacheMatrix()
 
 makeCacheMatrix <- function(x = matrix()) {
-  m <- NULL
+  m <- NULL                                       ##initialize the value of 'm' within local scope
   set <- function(y) {
-    x <<- y
-    m <<- NULL
+    x <<- y                                       ##initialize the value of the global variable 'x'
+    m <<- NULL                                    ##initialize the value of the global variable 'm'
   }
-  get <- function() x
-  setCacheMatrix <- function(solve) m <<- solve
-  getCacheMatrix <- function() m
-  list(set = set, get = get,
+  get <- function() x                             ##gets the matrix from the global variable 'x'
+  setCacheMatrix <- function(solve) m <<- solve   ##sets the value of the global variable 'm'
+  getCacheMatrix <- function() m                  ##gets the value of the global variable 'm'
+  list(set = set, get = get,                      ##lists methods for function
        setCacheMatrix = setCacheMatrix,
        getCacheMatrix = getCacheMatrix)
 }
@@ -33,13 +33,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ## 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  m <- x$getCacheMatrix()
-  if(!is.null(m)) {
+  m <- x$getCacheMatrix()                           ##get the cached value of the solved matrix
+  if(!is.null(m)) {                                 ##if the cached value is not null, return the cached value
     message("getting cached data")
     return(m)
   }
-  data <- x$get()
-  m <- solve(data, ...)
-  x$setCacheMatrix(m)
-  m
+  data <- x$get()                                   ##if the cached value is null, get the original matrix
+  m <- solve(data, ...)                             ##solve the identity matrix
+  x$setCacheMatrix(m)                               ##call a function to set the cached value to the solved identity matrix
+  m                                                 ##print the value of 'm' to the screen
 }
